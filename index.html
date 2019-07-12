@@ -1,0 +1,95 @@
+<head>
+  <title>Vue 101</title>
+   <link rel="stylesheet" type="text/css" href="component/index.css">
+</head>
+<header>
+  <h1> Hotel boekingen </h1>
+</header>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<body>
+ <h1> Hotel boekingen </h1>
+   <div id="app"></div>     
+
+   
+
+<script>
+
+   const app = new Vue({
+      el: '#app',
+      template: `
+         <div>
+            <input type="text" v-model.trim="hotelName"/>
+            <select v-model="hotelName">
+               <option v-for="hotel in hotels" :value="hotel.name">{{hotel.name}}</option>
+            </select>
+            {{hotelName}}
+            <hr>
+            <img :src="selectedHotelImage">   
+            <div v-html="selectedHotelPage"> </div>             
+         </div>   
+                        
+      `,
+        
+      data: {
+       hotelName: '',
+       hotels: [   
+          {name: "hotel1", img:'img/hotel1.jpg', html:"      <br>\
+             HotelName:                        Hotel du Paris    <br>\
+             Price per night:                  EUR 420           <br>\
+             Breakfast included:              YES               <br>\
+             Address:                         RUE CHAMP ELYSEE 1<br\
+             City:                             PARIS             <br>\
+             Review:                          * * * * *         <br>\
+             "},
+          {name: "hotel2", img:'img/hotel2.jpg', html:"<b></b><br>\
+             HotelName:                        Hotel California    <br>\
+             Price per night:                  USD 300           <br>\
+             Breakfast included:               YES               <br>\
+             Address:                          MAIN ST. 1<br\
+             City:                             Los Angeles            <br>\
+             Review:                           * * *          <br>\
+             "},
+          {name: "hotel3", img:'img/hotel3.jpg', html:"<b></b><br>\
+             HotelName:                        Hotel New York    <br>\
+             Price per night:                  USD 290           <br>\
+             Breakfast included:               NO               <br>\
+             Address:                          WALL ST. 1<br\
+             City:                             NEW YORK            <br>\
+             Review:                           * * * *          <br>\
+             "}
+          ]
+      },
+      computed: {
+         selectedHotelImage() {
+            var img = '';
+            this.hotels.forEach((el, index) => {
+               if(this.hotelName == el.name)
+                  { img = el.img; }
+               });
+           
+            return img;
+         },
+
+         selectedHotelPage() {
+            var html = '';
+            this.hotels.forEach((el, index) => {
+               if(this.hotelName == el.name)
+                  { html = el.html; }
+               });
+           
+            return html;
+         } 
+      }
+      
+    });
+ 
+
+  
+</script>
+
+</body>
+<footer>
+<h1>Hotel boekingen</h1>
+</footer>
+</html>
